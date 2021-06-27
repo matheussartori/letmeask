@@ -1,19 +1,13 @@
 import { useState, useEffect } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
-import { useToasts } from 'react-toast-notifications'
+import { useParams } from 'react-router-dom'
 
-import logoImg from '../../assets/images/logo.svg'
 import deleteImg from '../../assets/images/delete.svg'
 import checkImg from '../../assets/images/check.svg'
 import answerImg from '../../assets/images/answer.svg'
 import emptyQuestionsImg from '../../assets/images/empty-questions.svg'
 
-import { BiExit } from 'react-icons/bi'
-
-import { Button } from '../../components/Button'
+import { RoomHeader } from './components/RoomHeader'
 import { Question } from '../../components/Question'
-import { RoomCode } from '../../components/RoomCode'
-import { ThemeSwitch } from '../../components/ThemeSwitch'
 
 import { useRoom } from '../../hooks/useRoom'
 import { useModal } from '../../hooks/useModal'
@@ -28,61 +22,26 @@ type RoomParams = {
 
 export function AdminRoom(): JSX.Element {
   const [sharedQuestionId, setSharedQuestionId] = useState('')
-  const [action, setAction] = useState('')
 
   const params = useParams<RoomParams>()
   const roomId = params.id
-  const history = useHistory()
 
-  const { addToast } = useToasts()
   const { title, questions } = useRoom(roomId)
   const { openModal, isConfirmed, setIsConfirmed } = useModal()
 
   useEffect(() => {
-    async function handleEndRoom() {
-      if (isConfirmed && action === 'end_room') {
-        await database.ref(`rooms/${roomId}`).update({
-          endedAt: new Date()
-        })
-
-        history.push('/')
-        addToast('Sala encerrada com sucesso!', {
-          appearance: 'success',
-          autoDismiss: true
-        })
-      }
-      setIsConfirmed(false)
-      setAction('')
-    }
-    handleEndRoom()
-  }, [isConfirmed])
-
-  useEffect(() => {
     async function handleDeleteQuestion() {
-      if (isConfirmed && action === 'delete_question') {
+      if (isConfirmed) {
         await database
           .ref(`rooms/${roomId}/questions/${sharedQuestionId}`)
           .remove()
       }
       setIsConfirmed(false)
-      setAction('')
     }
     handleDeleteQuestion()
   }, [isConfirmed])
 
-  async function openEndRoomModal() {
-    setAction('end_room')
-    openModal({
-      title: 'Encerrar sala',
-      icon: 'denied',
-      text: 'Tem certeza que você deseja encerrar esta sala?',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Sim, encerrar'
-    })
-  }
-
   async function openDeleteQuestionModal(questionId: string) {
-    setAction('delete_question')
     setSharedQuestionId(questionId)
     openModal({
       title: 'Excluir pergunta',
@@ -107,26 +66,7 @@ export function AdminRoom(): JSX.Element {
 
   return (
     <Container>
-      <header>
-        <div className="content">
-          <img src={logoImg} alt="Letmeask" />
-          <div>
-            <RoomCode code={roomId} />
-            <Button isOutlined onClick={openEndRoomModal}>
-              Encerrar sala
-            </Button>
-            <Button
-              variant="danger"
-              title="Sair da sala"
-              onClick={() => history.push('/')}
-            >
-              <BiExit />
-            </Button>
-            <ThemeSwitch />
-          </div>
-        </div>
-      </header>
-
+      <RoomHeader roomId={roomId} isAdmin />
       <main>
         <div className="room-title">
           <h1>Sala {title}</h1>

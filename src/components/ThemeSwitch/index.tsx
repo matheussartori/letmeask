@@ -2,6 +2,8 @@ import Switch from 'react-switch'
 
 import { useTheme } from '../../hooks/useTheme'
 
+import { SwitchIcon } from './components/SwitchIcon'
+
 import { Container } from './styles'
 
 export function ThemeSwitch(): JSX.Element {
@@ -12,11 +14,12 @@ export function ThemeSwitch(): JSX.Element {
       <Switch
         onChange={toggleTheme}
         checked={theme === 'dark'}
-        checkedIcon={false}
-        uncheckedIcon={false}
-        height={20}
-        width={40}
-        handleDiameter={20}
+        checkedIcon={<SwitchIcon icon="sun" />}
+        uncheckedIcon={<SwitchIcon icon="moon" />}
+        height={25}
+        width={50}
+        handleDiameter={25}
+        onColor="#835afd"
       />
     </Container>
   )

@@ -32,7 +32,7 @@ export function RoomHeader({ roomId, isAdmin }: RoomHeaderProps): JSX.Element {
         })
 
         history.push('/')
-        addToast('Sala encerrada com sucesso!', {
+        addToast('You room was closed!', {
           appearance: 'success',
           autoDismiss: true
         })

@@ -25,8 +25,9 @@
 
 # Try it
 
-letmeask is hosted on firebase. You can play arround in:
-<a href="https://letmeask-86e5c.web.app/" target="_blank">letmeask firebase app</a>.
+letmeask is hosted on firebase. You can play arround in here:
+
+## [Live demo](https://letmeask-86e5c.web.app/)
 
 <hr />
 

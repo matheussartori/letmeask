@@ -1,5 +1,5 @@
 import { useCallback, createContext, ReactNode } from 'react'
-import { ThemeProvider, DefaultTheme } from 'styled-components'
+import { ThemeProvider } from 'styled-components'
 
 import { usePersistedState } from '../hooks/usePersistedState'
 
@@ -20,15 +20,17 @@ export const ThemeContext = createContext({} as ThemeContextType)
 export function ThemeContextProvider({
   children
 }: ThemeContextProviderProps): JSX.Element {
-  const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', light)
+  const [theme, setTheme] = usePersistedState<string>('theme', 'light')
 
   const toggleTheme = useCallback(() => {
-    setTheme(theme.title === 'light' ? dark : light)
+    setTheme(theme === 'light' ? 'dark' : 'light')
   }, [theme])
 
   return (
-    <ThemeContext.Provider value={{ theme: theme.title, toggleTheme }}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <ThemeProvider theme={theme === 'light' ? light : dark}>
+        {children}
+      </ThemeProvider>
     </ThemeContext.Provider>
   )
 }

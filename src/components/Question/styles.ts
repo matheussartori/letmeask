@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 interface QuestionProps {
   isAnswered: boolean
@@ -6,7 +7,7 @@ interface QuestionProps {
 }
 
 export const Container = styled.section<QuestionProps>`
-  background: #fefefe;
+  background: ${props => props.theme.colors.feature};
   border-radius: 8px;
   box-shadow: 0 2 12px rgba(0, 0, 0, 0.04);
   padding: 24px;
@@ -19,22 +20,22 @@ export const Container = styled.section<QuestionProps>`
     props.isHighlighted &&
     !props.isAnswered &&
     css`
-      background: #f4f0ff;
-      border: 1px solid #835afd;
+      background: ${props => props.theme.colors.feature};
+      border: 2px solid #835afd;
 
       footer .user-info span {
-        color: #29292e;
+        color: ${props => props.theme.colors.text};
       }
     `}
 
   p {
-    color: #29292e;
+    color: ${props => props.theme.colors.text};
   }
 
   ${props =>
     props.isAnswered &&
     css`
-      background: #dbdcdd;
+      background: ${props => darken(0.07, props.theme.colors.feature)};
 
       img {
         filter: grayscale(1);

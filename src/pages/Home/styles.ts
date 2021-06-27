@@ -65,6 +65,7 @@ export const Container = styled.div`
       font-size: 24px;
       margin: 64px 0 24px;
       font-family: 'Poppins', sans-serif;
+      color: ${props => props.theme.colors.text};
     }
 
     form {
@@ -72,7 +73,8 @@ export const Container = styled.div`
         height: 50px;
         border-radius: 8px;
         padding: 0 16px;
-        background: #fff;
+        background: ${props => props.theme.colors.secondary};
+        color: ${props => props.theme.colors.text};
         border: 1px solid #a8a8b3;
       }
 

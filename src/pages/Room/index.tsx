@@ -10,6 +10,7 @@ import { BiExit } from 'react-icons/bi'
 import { Button } from '../../components/Button'
 import { Question } from '../../components/Question'
 import { RoomCode } from '../../components/RoomCode'
+import { ThemeSwitch } from '../../components/ThemeSwitch'
 
 import { useAuth } from '../../hooks/useAuth'
 import { useRoom } from '../../hooks/useRoom'
@@ -91,6 +92,7 @@ export function Room(): JSX.Element {
             >
               <BiExit />
             </Button>
+            <ThemeSwitch />
           </div>
         </div>
       </header>

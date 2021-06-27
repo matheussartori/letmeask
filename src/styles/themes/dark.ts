@@ -3,9 +3,11 @@ export default {
 
   colors: {
     primary: '',
-    secondary: '',
+    secondary: '#333333',
+    trace: '#333333',
+    feature: '#212121',
 
-    background: '#171717',
-    text: ''
+    background: '#131313',
+    text: '#DDDDDD'
   }
 }

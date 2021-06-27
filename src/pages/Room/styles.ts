@@ -1,9 +1,9 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   header {
     padding: 24px;
-    border-bottom: 1px solid #e2e2e2;
+    border-bottom: 1px solid ${props => props.theme.colors.trace};
 
     .content {
       max-width: 1120px;
@@ -53,7 +53,7 @@ export const Container = styled.div`
       h1 {
         font-family: 'Poppins', sans-serif;
         font-size: 24px;
-        color: #29292e;
+        color: ${props => props.theme.colors.text};
       }
 
       span {
@@ -73,8 +73,16 @@ export const Container = styled.div`
         border: 0;
         padding: 16px;
         border-radius: 8px;
-        background: #fefefe;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        background: ${props => props.theme.colors.feature};
+        color: ${props => props.theme.colors.text};
+        ${props =>
+          props.theme.title === 'light'
+            ? css`
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+              `
+            : css`
+                box-shadow: 0 2px 12px rgba(255, 255, 255, 0.04);
+              `};
         resize: vertical;
         min-height: 130px;
       }
@@ -97,7 +105,7 @@ export const Container = styled.div`
 
           span {
             margin-left: 8px;
-            color: #29292e;
+            color: ${props => props.theme.colors.text};
             font-weight: 500;
             font-size: 14px;
           }
@@ -138,6 +146,7 @@ export const Container = styled.div`
         font-family: 'Poppins', sans-serif;
         font-weight: 600;
         font-size: 18px;
+        color: ${props => props.theme.colors.text};
       }
 
       p {
@@ -146,6 +155,7 @@ export const Container = styled.div`
         font-size: 14px;
         max-width: 280px;
         text-align: center;
+        color: ${props => props.theme.colors.text};
       }
     }
   }

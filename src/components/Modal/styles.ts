@@ -1,4 +1,5 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, css } from 'styled-components'
+import { lighten, darken } from 'polished'
 
 export const GlobalModalStyle = createGlobalStyle`
   .ReactModal__Overlay {
@@ -20,6 +21,8 @@ export const GlobalModalStyle = createGlobalStyle`
     justify-content: center;
     align-items: center;
     gap: 10px;
+    background: ${props => props.theme.colors.background} !important;
+    border: 0 !important;
 
     @media only screen and (max-width: 967px) {
       width: 90%;
@@ -36,6 +39,7 @@ export const GlobalModalStyle = createGlobalStyle`
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
       font-size: 24px;
+      color: ${props => props.theme.colors.text};
     }
 
     p {
@@ -61,7 +65,17 @@ export const GlobalModalStyle = createGlobalStyle`
         }
 
         &.modal-button-cancel {
-          background-color: #dbdcdd;
+          ${props =>
+            props.theme.title === 'light'
+              ? css`
+                  background-color: ${darken(0.05, props.theme.colors.feature)};
+                `
+              : css`
+                  background-color: ${lighten(
+                    0.05,
+                    props.theme.colors.feature
+                  )};
+                `}
           color: #737380;
         }
 

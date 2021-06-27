@@ -29,7 +29,7 @@ export const Container = styled.button<ButtonProps>`
   ${props =>
     props.isOutlined &&
     css`
-      background: #fff;
+      background: ${props => props.theme.colors.background};
       border: 1px solid #835afd;
       color: #835afd;
     `}

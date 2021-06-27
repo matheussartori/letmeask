@@ -1,9 +1,9 @@
 import { BrowserRouter, Route } from 'react-router-dom'
 
 import { Home } from './pages/Home'
-import { NewRoom } from './pages/NewRoom'
+import { NewRoom } from './pages/Home/NewRoom'
 import { Room } from './pages/Room'
-import { AdminRoom } from './pages/AdminRoom'
+import { AdminRoom } from './pages/Room/AdminRoom'
 
 import { AuthContextProvider } from './contexts/AuthContext'
 import { ModalContextProvider } from './contexts/ModalContext'

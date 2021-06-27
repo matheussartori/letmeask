@@ -5,6 +5,11 @@
   align-items: center;
   gap: 10px;
 
+  @media only screen and (max-width: 967px) {
+    width: 90%;  
+    padding: 20px !important;
+  }
+
   svg {
     color: #E73F5D;
     font-size: 56px;

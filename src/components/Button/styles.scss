@@ -25,6 +25,10 @@
     color: #835AFD;
   }
 
+  &.danger {
+    background: #E73F5D;
+  }
+
   &:not(:disabled):hover {
     filter: brightness(0.9);
   }

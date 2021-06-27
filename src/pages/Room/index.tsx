@@ -1,9 +1,11 @@
 import { FormEvent, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { useToasts } from 'react-toast-notifications'
 
 import logoImg from '../../assets/images/logo.svg'
 import emptyQuestionsImg from '../../assets/images/empty-questions.svg'
+
+import { BiExit } from 'react-icons/bi'
 
 import { Button } from '../../components/Button'
 import { Question } from '../../components/Question'
@@ -22,6 +24,7 @@ type RoomParams = {
 
 export function Room(): JSX.Element {
   const [newQuestion, setNewQuestion] = useState('')
+  const history = useHistory()
 
   const { user, signInWithGoogle } = useAuth()
   const { addToast } = useToasts()
@@ -79,7 +82,16 @@ export function Room(): JSX.Element {
       <header>
         <div className="content">
           <img src={logoImg} alt="Letmeask" />
-          <RoomCode code={roomId} />
+          <div>
+            <RoomCode code={roomId} />
+            <Button
+              variant="danger"
+              title="Sair da sala"
+              onClick={() => history.push('/')}
+            >
+              <BiExit />
+            </Button>
+          </div>
         </div>
       </header>
 

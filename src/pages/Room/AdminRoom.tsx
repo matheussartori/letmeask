@@ -7,6 +7,8 @@ import checkImg from '../../assets/images/check.svg'
 import answerImg from '../../assets/images/answer.svg'
 import emptyQuestionsImg from '../../assets/images/empty-questions.svg'
 
+import { BiExit } from 'react-icons/bi'
+
 import { Button } from '../../components/Button'
 import { Question } from '../../components/Question'
 import { RoomCode } from '../../components/RoomCode'
@@ -111,6 +113,13 @@ export function AdminRoom(): JSX.Element {
             <RoomCode code={roomId} />
             <Button isOutlined onClick={openEndRoomModal}>
               Encerrar sala
+            </Button>
+            <Button
+              variant="danger"
+              title="Sair da sala"
+              onClick={() => history.push('/')}
+            >
+              <BiExit />
             </Button>
           </div>
         </div>

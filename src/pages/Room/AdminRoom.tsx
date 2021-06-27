@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
+import { useToasts } from 'react-toast-notifications'
 
 import logoImg from '../../assets/images/logo.svg'
 import deleteImg from '../../assets/images/delete.svg'
@@ -18,8 +19,7 @@ import { useModal } from '../../hooks/useModal'
 
 import { database } from '../../services/firebase'
 
-import './styles.scss'
-import { useToasts } from 'react-toast-notifications'
+import { Container } from './styles'
 
 type RoomParams = {
   id: string
@@ -105,7 +105,7 @@ export function AdminRoom(): JSX.Element {
   }
 
   return (
-    <div id="page-room">
+    <Container>
       <header>
         <div className="content">
           <img src={logoImg} alt="Letmeask" />
@@ -182,6 +182,6 @@ export function AdminRoom(): JSX.Element {
           </div>
         )}
       </main>
-    </div>
+    </Container>
   )
 }

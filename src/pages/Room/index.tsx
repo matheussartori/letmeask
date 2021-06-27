@@ -16,7 +16,7 @@ import { useRoom } from '../../hooks/useRoom'
 
 import { database } from '../../services/firebase'
 
-import './styles.scss'
+import { Container } from './styles'
 
 type RoomParams = {
   id: string
@@ -78,7 +78,7 @@ export function Room(): JSX.Element {
   }
 
   return (
-    <div id="page-room">
+    <Container>
       <header>
         <div className="content">
           <img src={logoImg} alt="Letmeask" />
@@ -184,6 +184,6 @@ export function Room(): JSX.Element {
           </div>
         )}
       </main>
-    </div>
+    </Container>
   )
 }

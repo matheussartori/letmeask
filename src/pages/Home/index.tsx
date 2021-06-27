@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { useAuth } from '../../hooks/useAuth'
+import { useModal } from '../../hooks/useModal'
 
 import illustrationImg from '../../assets/images/illustration.svg'
 import logoImg from '../../assets/images/logo.svg'
@@ -11,8 +12,7 @@ import { Button } from '../../components/Button'
 
 import { database } from '../../services/firebase'
 
-import './styles.scss'
-import { useModal } from '../../hooks/useModal'
+import { Container } from './styles'
 
 export function Home(): JSX.Element {
   const [roomCode, setRoomCode] = useState('')
@@ -61,7 +61,7 @@ export function Home(): JSX.Element {
   }
 
   return (
-    <div id="page-auth">
+    <Container>
       <aside>
         <img
           src={illustrationImg}
@@ -89,6 +89,6 @@ export function Home(): JSX.Element {
           </form>
         </div>
       </main>
-    </div>
+    </Container>
   )
 }

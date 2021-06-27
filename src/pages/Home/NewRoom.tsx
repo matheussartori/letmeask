@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
 import { database } from '../../services/firebase'
+
 import { useAuth } from '../../hooks/useAuth'
 
 import illustrationImg from '../../assets/images/illustration.svg'
@@ -9,7 +10,7 @@ import logoImg from '../../assets/images/logo.svg'
 
 import { Button } from '../../components/Button'
 
-import './styles.scss'
+import { Container } from './styles'
 
 export function NewRoom(): JSX.Element {
   const { user } = useAuth()
@@ -34,7 +35,7 @@ export function NewRoom(): JSX.Element {
   }
 
   return (
-    <div id="page-auth">
+    <Container>
       <aside>
         <img
           src={illustrationImg}
@@ -61,6 +62,6 @@ export function NewRoom(): JSX.Element {
           </p>
         </div>
       </main>
-    </div>
+    </Container>
   )
 }

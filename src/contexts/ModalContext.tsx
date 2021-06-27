@@ -1,9 +1,6 @@
 import { ReactNode, createContext, useState } from 'react'
-import ReactModal from 'react-modal'
-import { BiTrashAlt } from 'react-icons/bi'
-import { RiCloseCircleLine } from 'react-icons/ri'
 
-import '../styles/modal.scss'
+import { Modal } from '../components/Modal'
 
 type OpenModalDTO = {
   title: string
@@ -24,22 +21,6 @@ type ModalContextProviderProps = {
 }
 
 export const ModalContext = createContext({} as ModalContextType)
-
-const customStyle = {
-  overlay: {
-    backgroundColor: 'rgba(0,0,0,.8)'
-  },
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    borderRadius: '8px',
-    padding: '60px 100px'
-  }
-}
 
 export function ModalContextProvider({
   children
@@ -81,29 +62,16 @@ export function ModalContextProvider({
 
   return (
     <ModalContext.Provider value={{ isConfirmed, openModal, setIsConfirmed }}>
-      <ReactModal
+      <Modal
         isOpen={isOpen}
-        style={customStyle}
-        ariaHideApp={false}
-        closeTimeoutMS={200}
-      >
-        {icon === 'trash' ? <BiTrashAlt /> : <RiCloseCircleLine />}
-        <h3>{title}</h3>
-        <p>{text}</p>
-        <footer>
-          {cancelButtonText && cancelButtonText.length > 0 && (
-            <button
-              className="modal-button-cancel"
-              onClick={() => setIsOpen(false)}
-            >
-              {cancelButtonText}
-            </button>
-          )}
-          <button className="modal-button-confirm" onClick={handleClose}>
-            {confirmButtonText}
-          </button>
-        </footer>
-      </ReactModal>
+        icon={icon}
+        title={title}
+        text={text}
+        confirmButtonText={confirmButtonText}
+        cancelButtonText={cancelButtonText}
+        handleClose={handleClose}
+        setIsOpen={setIsOpen}
+      />
       {children}
     </ModalContext.Provider>
   )

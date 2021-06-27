@@ -7,12 +7,9 @@ import { AdminRoom } from './pages/Room/AdminRoom'
 
 import { AppProvider } from './AppProvider'
 
-import { GlobalStyles } from './styles/global'
-
 function App(): JSX.Element {
   return (
     <BrowserRouter>
-      <GlobalStyles />
       <AppProvider>
         <Route path="/" exact component={Home} />
         <Route path="/rooms/new" component={NewRoom} />

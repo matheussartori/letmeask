@@ -1,13 +1,12 @@
 import { ReactNode } from 'react'
 
 import { ToastProvider } from 'react-toast-notifications'
-import { ThemeProvider } from 'styled-components'
 
 import { AuthContextProvider } from './contexts/AuthContext'
 import { ModalContextProvider } from './contexts/ModalContext'
+import { ThemeContextProvider } from './contexts/ThemeContext'
 
-import light from './styles/themes/light'
-import dark from './styles/themes/dark'
+import { GlobalStyles } from './styles/global'
 
 type AppProviderProps = {
   children?: ReactNode
@@ -15,12 +14,13 @@ type AppProviderProps = {
 
 export function AppProvider({ children }: AppProviderProps): JSX.Element {
   return (
-    <ThemeProvider theme={light}>
+    <ThemeContextProvider>
+      <GlobalStyles />
       <ToastProvider>
         <AuthContextProvider>
           <ModalContextProvider>{children}</ModalContextProvider>
         </AuthContextProvider>
       </ToastProvider>
-    </ThemeProvider>
+    </ThemeContextProvider>
   )
 }

@@ -13,6 +13,7 @@ import { BiExit } from 'react-icons/bi'
 import { Button } from '../../components/Button'
 import { Question } from '../../components/Question'
 import { RoomCode } from '../../components/RoomCode'
+import { ThemeSwitch } from '../../components/ThemeSwitch'
 
 import { useRoom } from '../../hooks/useRoom'
 import { useModal } from '../../hooks/useModal'
@@ -121,6 +122,7 @@ export function AdminRoom(): JSX.Element {
             >
               <BiExit />
             </Button>
+            <ThemeSwitch />
           </div>
         </div>
       </header>

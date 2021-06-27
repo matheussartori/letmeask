@@ -1,33 +1,45 @@
-.question {
-  background: #FEFEFE;
+import styled, { css } from 'styled-components'
+
+interface QuestionProps {
+  isAnswered: boolean
+  isHighlighted: boolean
+}
+
+export const Container = styled.section<QuestionProps>`
+  background: #fefefe;
   border-radius: 8px;
-  box-shadow: 0 2 12px rgba(0,0,0,.04);
+  box-shadow: 0 2 12px rgba(0, 0, 0, 0.04);
   padding: 24px;
 
-  & + .question {
+  & + section {
     margin-top: 8px;
   }
 
-  &.highlighted {
-    background: #F4F0FF;
-    border: 1px solid #835AFD;
+  ${props =>
+    props.isHighlighted &&
+    !props.isAnswered &&
+    css`
+      background: #f4f0ff;
+      border: 1px solid #835afd;
 
-    footer .user-info span {
-      color: #29292E;
-    }
-  }
+      footer .user-info span {
+        color: #29292e;
+      }
+    `}
 
   p {
-    color: #29292E;
+    color: #29292e;
   }
 
-  &.answered {
-    background: #DBDCDD;
+  ${props =>
+    props.isAnswered &&
+    css`
+      background: #dbdcdd;
 
-    img {
-      filter: grayscale(1);
-    }
-  }
+      img {
+        filter: grayscale(1);
+      }
+    `}
 
   footer {
     display: flex;
@@ -70,17 +82,17 @@
         gap: 8px;
 
         &.liked {
-          color: #835AFD;
+          color: #835afd;
 
           svg path {
-            stroke: #835AFD;
+            stroke: #835afd;
           }
         }
       }
 
       &:hover {
-        filter: brightness(0.7)
+        filter: brightness(0.7);
       }
     }
   }
-}
+`

@@ -1,7 +1,6 @@
 import { ButtonHTMLAttributes } from 'react'
-import cx from 'classnames'
 
-import './styles.scss'
+import { Container } from './styles'
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   isOutlined?: boolean
@@ -13,14 +12,5 @@ export function Button({
   variant = 'normal',
   ...props
 }: ButtonProps): JSX.Element {
-  return (
-    <button
-      className={cx(
-        'button',
-        { outlined: isOutlined },
-        { danger: variant === 'danger' }
-      )}
-      {...props}
-    />
-  )
+  return <Container isOutlined={isOutlined} variant={variant} {...props} />
 }

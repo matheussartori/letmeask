@@ -12,11 +12,13 @@ import { Button } from '../../components/Button'
 import { database } from '../../services/firebase'
 
 import './styles.scss'
+import { useModal } from '../../hooks/useModal'
 
 export function Home () {
   const [roomCode, setRoomCode] = useState('')
   const history = useHistory()
   const { user, signInWithGoogle } = useAuth()
+  const { openModal } = useModal()
 
   async function handleCreateRoom () {
     if (!user) {
@@ -36,12 +38,22 @@ export function Home () {
     const roomRef = await database.ref(`rooms/${roomCode}`).get()
 
     if (!roomRef.exists()) {
-      alert('Room does not exists.')
+      openModal({
+        title: 'Oops!',
+        text: 'A sala informada não existe.',
+        icon: 'denied',
+        confirmButtonText: 'OK'
+      })
       return
     }
 
     if (roomRef.val().endedAt) {
-      alert('Room already closed.')
+      openModal({
+        title: 'Oops!',
+        text: 'A sala informada já foi encerrada.',
+        icon: 'denied',
+        confirmButtonText: 'OK'
+      })
       return
     }
 

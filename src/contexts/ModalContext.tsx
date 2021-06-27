@@ -9,7 +9,7 @@ type OpenModalDTO = {
   title: string
   text: string
   icon: 'trash' | 'denied'
-  cancelButtonText: string
+  cancelButtonText?: string
   confirmButtonText: string
 }
 
@@ -47,7 +47,7 @@ export function ModalContextProvider ({ children }: ModalContextProviderProps) {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [icon, setIcon] = useState('')
-  const [cancelButtonText, setCancelButtonText] = useState('')
+  const [cancelButtonText, setCancelButtonText] = useState<string | undefined>(undefined)
   const [confirmButtonText, setConfirmButtonText] = useState('')
 
   function openModal ({
@@ -62,7 +62,11 @@ export function ModalContextProvider ({ children }: ModalContextProviderProps) {
     setTitle(title)
     setText(text)
     setIcon(icon)
-    setCancelButtonText(cancelButtonText)
+    if (cancelButtonText && cancelButtonText.length > 0) {
+      setCancelButtonText(cancelButtonText)
+    } else {
+      setCancelButtonText(undefined)
+    }
     setConfirmButtonText(confirmButtonText)
   }
 
@@ -77,12 +81,15 @@ export function ModalContextProvider ({ children }: ModalContextProviderProps) {
         isOpen={isOpen}
         style={customStyle}
         ariaHideApp={false}
+        closeTimeoutMS={200}
       >
         {icon === 'trash' ? <BiTrashAlt /> : <RiCloseCircleLine /> }
         <h3>{title}</h3>
         <p>{text}</p>
         <footer>
-          <button className="modal-button-cancel" onClick={() => setIsOpen(false)}>{cancelButtonText}</button>
+          {cancelButtonText && cancelButtonText.length > 0 && (
+            <button className="modal-button-cancel" onClick={() => setIsOpen(false)}>{cancelButtonText}</button>
+          )}
           <button className="modal-button-confirm" onClick={handleClose}>{confirmButtonText}</button>
         </footer>
       </ReactModal>

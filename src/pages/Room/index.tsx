@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useToasts } from 'react-toast-notifications'
 
 import logoImg from '../../assets/images/logo.svg'
+import emptyQuestionsImg from '../../assets/images/empty-questions.svg'
 
 import { Button } from '../../components/Button'
 import { Question } from '../../components/Question'
@@ -22,7 +23,7 @@ type RoomParams = {
 export function Room () {
   const [newQuestion, setNewQuestion] = useState('')
 
-  const { user } = useAuth()
+  const { user, signInWithGoogle } = useAuth()
   const { addToast } = useToasts()
   const params = useParams<RoomParams>()
   const roomId = params.id
@@ -80,7 +81,7 @@ export function Room () {
       <main>
         <div className="room-title">
           <h1>Sala {title}</h1>
-          {questions.length > 0 ?? (
+          {questions.length > 0 && (
             <span>{questions.length} pergunta(s)</span>
           )}
         </div>
@@ -99,10 +100,12 @@ export function Room () {
                   <img src={user.avatar} alt={user.name} />
                   <span>{user.name}</span>
                 </div>
-                )
+              )
               : (
-                <span>Para enviar uma pergunta, <button>faça seu login</button>.</span>
-                )}
+                <span>Para enviar uma pergunta,
+                  <button onClick={signInWithGoogle}>faça seu login</button>.
+                </span>
+              )}
             <Button type="submit" disabled={!user}>Enviar pergunta</Button>
           </div>
         </form>
@@ -134,6 +137,22 @@ export function Room () {
             )
           })}
         </div>
+
+        {questions && questions.length === 0 && (
+          <div className="empty-questions">
+            <img src={emptyQuestionsImg} alt="Nenhuma pergunta" />
+            <h3>Nenhuma pergunta por aqui...</h3>
+            {user
+              ? (
+                <p>Seja a primeira pessoa a fazer uma pergunta!</p>
+              )
+              : (
+                <p>Faça seu login e seja a primeira pessoa a fazer uma pergunta!</p>
+              )
+            }
+          </div>
+        )}
+
       </main>
     </div>
   )

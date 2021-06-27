@@ -122,5 +122,29 @@
     .question-list {
       margin: 32px 0;
     }
+
+    .empty-questions {
+      margin-top: 56px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      h3 {
+        margin-top: 8px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      p {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        max-width: 280px;
+        text-align: center;
+      }
+    }
   }
 }

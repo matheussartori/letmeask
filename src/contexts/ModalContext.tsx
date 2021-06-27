@@ -13,7 +13,7 @@ type OpenModalDTO = {
   confirmButtonText: string
 }
 
-type ModalContextType = {
+export type ModalContextType = {
   isConfirmed: boolean
   setIsConfirmed: (confirmed: boolean) => void
   openModal: (modalAttributes: OpenModalDTO) => void
@@ -41,16 +41,20 @@ const customStyle = {
   }
 }
 
-export function ModalContextProvider ({ children }: ModalContextProviderProps) {
+export function ModalContextProvider({
+  children
+}: ModalContextProviderProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false)
   const [isConfirmed, setIsConfirmed] = useState(false)
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [icon, setIcon] = useState('')
-  const [cancelButtonText, setCancelButtonText] = useState<string | undefined>(undefined)
+  const [cancelButtonText, setCancelButtonText] = useState<string | undefined>(
+    undefined
+  )
   const [confirmButtonText, setConfirmButtonText] = useState('')
 
-  function openModal ({
+  function openModal({
     title,
     text,
     icon,
@@ -70,7 +74,7 @@ export function ModalContextProvider ({ children }: ModalContextProviderProps) {
     setConfirmButtonText(confirmButtonText)
   }
 
-  function handleClose () {
+  function handleClose() {
     setIsOpen(false)
     setIsConfirmed(true)
   }
@@ -83,14 +87,21 @@ export function ModalContextProvider ({ children }: ModalContextProviderProps) {
         ariaHideApp={false}
         closeTimeoutMS={200}
       >
-        {icon === 'trash' ? <BiTrashAlt /> : <RiCloseCircleLine /> }
+        {icon === 'trash' ? <BiTrashAlt /> : <RiCloseCircleLine />}
         <h3>{title}</h3>
         <p>{text}</p>
         <footer>
           {cancelButtonText && cancelButtonText.length > 0 && (
-            <button className="modal-button-cancel" onClick={() => setIsOpen(false)}>{cancelButtonText}</button>
+            <button
+              className="modal-button-cancel"
+              onClick={() => setIsOpen(false)}
+            >
+              {cancelButtonText}
+            </button>
           )}
-          <button className="modal-button-confirm" onClick={handleClose}>{confirmButtonText}</button>
+          <button className="modal-button-confirm" onClick={handleClose}>
+            {confirmButtonText}
+          </button>
         </footer>
       </ReactModal>
       {children}

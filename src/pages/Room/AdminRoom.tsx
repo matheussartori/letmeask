@@ -23,7 +23,7 @@ type RoomParams = {
   id: string
 }
 
-export function AdminRoom () {
+export function AdminRoom(): JSX.Element {
   const [sharedQuestionId, setSharedQuestionId] = useState('')
   const [action, setAction] = useState('')
 
@@ -36,7 +36,7 @@ export function AdminRoom () {
   const { openModal, isConfirmed, setIsConfirmed } = useModal()
 
   useEffect(() => {
-    async function handleEndRoom () {
+    async function handleEndRoom() {
       if (isConfirmed && action === 'end_room') {
         await database.ref(`rooms/${roomId}`).update({
           endedAt: new Date()
@@ -55,9 +55,11 @@ export function AdminRoom () {
   }, [isConfirmed])
 
   useEffect(() => {
-    async function handleDeleteQuestion () {
+    async function handleDeleteQuestion() {
       if (isConfirmed && action === 'delete_question') {
-        await database.ref(`rooms/${roomId}/questions/${sharedQuestionId}`).remove()
+        await database
+          .ref(`rooms/${roomId}/questions/${sharedQuestionId}`)
+          .remove()
       }
       setIsConfirmed(false)
       setAction('')
@@ -65,7 +67,7 @@ export function AdminRoom () {
     handleDeleteQuestion()
   }, [isConfirmed])
 
-  async function openEndRoomModal () {
+  async function openEndRoomModal() {
     setAction('end_room')
     openModal({
       title: 'Encerrar sala',
@@ -76,7 +78,7 @@ export function AdminRoom () {
     })
   }
 
-  async function openDeleteQuestionModal (questionId: string) {
+  async function openDeleteQuestionModal(questionId: string) {
     setAction('delete_question')
     setSharedQuestionId(questionId)
     openModal({
@@ -88,13 +90,13 @@ export function AdminRoom () {
     })
   }
 
-  async function handleCheckQuestionAsAnswered (questionId: string) {
+  async function handleCheckQuestionAsAnswered(questionId: string) {
     await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
       isAnswered: true
     })
   }
 
-  async function handleHighlightQuestion (questionId: string) {
+  async function handleHighlightQuestion(questionId: string) {
     await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
       isHighlighted: true
     })
@@ -107,10 +109,9 @@ export function AdminRoom () {
           <img src={logoImg} alt="Letmeask" />
           <div>
             <RoomCode code={roomId} />
-            <Button
-              isOutlined
-              onClick={openEndRoomModal}
-            >Encerrar sala</Button>
+            <Button isOutlined onClick={openEndRoomModal}>
+              Encerrar sala
+            </Button>
           </div>
         </div>
       </header>
@@ -118,9 +119,7 @@ export function AdminRoom () {
       <main>
         <div className="room-title">
           <h1>Sala {title}</h1>
-          {questions.length > 0 && (
-            <span>{questions.length} pergunta(s)</span>
-          )}
+          {questions.length > 0 && <span>{questions.length} pergunta(s)</span>}
         </div>
 
         <div className="question-list">
@@ -139,7 +138,10 @@ export function AdminRoom () {
                       type="button"
                       onClick={() => handleCheckQuestionAsAnswered(question.id)}
                     >
-                      <img src={checkImg} alt="Marcar pergunta como respondida" />
+                      <img
+                        src={checkImg}
+                        alt="Marcar pergunta como respondida"
+                      />
                     </button>
                     <button
                       type="button"
@@ -164,10 +166,12 @@ export function AdminRoom () {
           <div className="empty-questions" style={{ marginTop: 150 }}>
             <img src={emptyQuestionsImg} alt="Nenhuma pergunta" />
             <h3>Nenhuma pergunta por aqui...</h3>
-            <p>Envie o código desta sala para seus amigos e comece a responder perguntas!</p>
+            <p>
+              Envie o código desta sala para seus amigos e comece a responder
+              perguntas!
+            </p>
           </div>
         )}
-
       </main>
     </div>
   )

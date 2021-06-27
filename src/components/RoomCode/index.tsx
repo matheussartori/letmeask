@@ -6,8 +6,8 @@ type RoomCodeProps = {
   code: string
 }
 
-export function RoomCode ({ code }: RoomCodeProps) {
-  function copyRoomCodeToClipboard () {
+export function RoomCode({ code }: RoomCodeProps): JSX.Element {
+  function copyRoomCodeToClipboard() {
     navigator.clipboard.writeText(code)
   }
 

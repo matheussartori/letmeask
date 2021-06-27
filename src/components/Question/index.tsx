@@ -14,13 +14,13 @@ type QuestionProps = {
   isHighlighted?: boolean
 }
 
-export function Question ({
+export function Question({
   content,
   author,
   children,
   isAnswered = false,
   isHighlighted = false
-}: QuestionProps) {
+}: QuestionProps): JSX.Element {
   return (
     <div
       className={cx(
@@ -35,9 +35,7 @@ export function Question ({
           <img src={author.avatar} alt={author.name} />
           <span>{author.name}</span>
         </div>
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
       </footer>
     </div>
   )

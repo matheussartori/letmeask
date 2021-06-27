@@ -14,13 +14,13 @@ import { database } from '../../services/firebase'
 import './styles.scss'
 import { useModal } from '../../hooks/useModal'
 
-export function Home () {
+export function Home(): JSX.Element {
   const [roomCode, setRoomCode] = useState('')
   const history = useHistory()
   const { user, signInWithGoogle } = useAuth()
   const { openModal } = useModal()
 
-  async function handleCreateRoom () {
+  async function handleCreateRoom() {
     if (!user) {
       await signInWithGoogle()
     }
@@ -28,7 +28,7 @@ export function Home () {
     history.push('/rooms/new')
   }
 
-  async function handleJoinRoom (event: FormEvent) {
+  async function handleJoinRoom(event: FormEvent) {
     event.preventDefault()
 
     if (roomCode.trim() === '') {
@@ -63,7 +63,10 @@ export function Home () {
   return (
     <div id="page-auth">
       <aside>
-        <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
+        <img
+          src={illustrationImg}
+          alt="Ilustração simbolizando perguntas e respostas"
+        />
         <strong>Crie salas de Q&amp;A ao-vivo</strong>
         <p>Tire as dúvidas da sua audiência em tempo-real</p>
       </aside>
@@ -82,9 +85,7 @@ export function Home () {
               value={roomCode}
               onChange={event => setRoomCode(event.target.value)}
             />
-            <Button type="submit">
-              Entrar na sala
-            </Button>
+            <Button type="submit">Entrar na sala</Button>
           </form>
         </div>
       </main>

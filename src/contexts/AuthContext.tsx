@@ -8,7 +8,7 @@ type User = {
   avatar: string
 }
 
-type AuthContextType = {
+export type AuthContextType = {
   user: User | undefined
   signInWithGoogle: () => Promise<void>
 }
@@ -19,7 +19,9 @@ type AuthContextProviderProps = {
 
 export const AuthContext = createContext({} as AuthContextType)
 
-export function AuthContextProvider ({ children }: AuthContextProviderProps) {
+export function AuthContextProvider({
+  children
+}: AuthContextProviderProps): JSX.Element {
   const [user, setUser] = useState<User>()
   const { addToast } = useToasts()
 
@@ -29,10 +31,13 @@ export function AuthContextProvider ({ children }: AuthContextProviderProps) {
         const { displayName, photoURL, uid } = user
 
         if (!displayName || !photoURL) {
-          addToast('Existem informações faltando na sua conta Google. Por favor, defina um nome e uma foto e tente novamente.', {
-            appearance: 'error',
-            autoDismiss: true
-          })
+          addToast(
+            'Existem informações faltando na sua conta Google. Por favor, defina um nome e uma foto e tente novamente.',
+            {
+              appearance: 'error',
+              autoDismiss: true
+            }
+          )
           return
         }
 
@@ -49,7 +54,7 @@ export function AuthContextProvider ({ children }: AuthContextProviderProps) {
     }
   }, [])
 
-  async function signInWithGoogle () {
+  async function signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider()
 
     const result = await auth.signInWithPopup(provider)
@@ -58,10 +63,13 @@ export function AuthContextProvider ({ children }: AuthContextProviderProps) {
       const { displayName, photoURL, uid } = result.user
 
       if (!displayName || !photoURL) {
-        addToast('Existem informações faltando na sua conta Google. Por favor, defina um nome e uma foto e tente novamente.', {
-          appearance: 'error',
-          autoDismiss: true
-        })
+        addToast(
+          'Existem informações faltando na sua conta Google. Por favor, defina um nome e uma foto e tente novamente.',
+          {
+            appearance: 'error',
+            autoDismiss: true
+          }
+        )
         return
       }
 

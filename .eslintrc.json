@@ -5,7 +5,8 @@
   },
   "extends": [
     "plugin:react/recommended",
-    "standard"
+    "standard",
+    "plugin:@typescript-eslint/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -17,9 +18,13 @@
   },
   "plugins": [
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "prettier"
   ],
   "rules": {
+    "prettier/prettier": [
+      "error"
+    ],
     "quotes": [
       "error",
       "single"
@@ -36,13 +41,11 @@
       "error",
       "unix"
     ],
-    "object-curly-spacing": [
-      "error",
-      "always"
-    ],
     "indent": "off",
     "no-use-before-define": "off",
     "camelcase": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "space-before-function-paren": "off",
+    "multiline-ternary": "off"
   }
 }

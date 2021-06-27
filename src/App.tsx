@@ -7,7 +7,7 @@ import { AdminRoom } from './pages/Room/AdminRoom'
 
 import { AppProvider } from './AppProvider'
 
-function App () {
+function App(): JSX.Element {
   return (
     <BrowserRouter>
       <AppProvider>

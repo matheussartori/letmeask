@@ -11,12 +11,12 @@ import { Button } from '../../components/Button'
 
 import './styles.scss'
 
-export function NewRoom () {
+export function NewRoom(): JSX.Element {
   const { user } = useAuth()
   const history = useHistory()
   const [newRoom, setNewRoom] = useState('')
 
-  async function handleCreateRoom (event: FormEvent) {
+  async function handleCreateRoom(event: FormEvent) {
     event.preventDefault()
 
     if (newRoom.trim() === '') {
@@ -36,7 +36,10 @@ export function NewRoom () {
   return (
     <div id="page-auth">
       <aside>
-        <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
+        <img
+          src={illustrationImg}
+          alt="Ilustração simbolizando perguntas e respostas"
+        />
         <strong>Crie salas de Q&amp;A ao-vivo</strong>
         <p>Tire as dúvidas da sua audiência em tempo-real</p>
       </aside>
@@ -51,11 +54,11 @@ export function NewRoom () {
               value={newRoom}
               onChange={event => setNewRoom(event.target.value)}
             />
-            <Button type="submit">
-              Criar sala
-            </Button>
+            <Button type="submit">Criar sala</Button>
           </form>
-          <p>Quer entrar em uma sala existente? <Link to="/">clique aqui</Link></p>
+          <p>
+            Quer entrar em uma sala existente? <Link to="/">clique aqui</Link>
+          </p>
         </div>
       </main>
     </div>

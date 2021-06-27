@@ -9,13 +9,11 @@ type AppProviderProps = {
   children?: ReactNode
 }
 
-export function AppProvider ({ children }: AppProviderProps) {
+export function AppProvider({ children }: AppProviderProps): JSX.Element {
   return (
     <ToastProvider>
       <AuthContextProvider>
-        <ModalContextProvider>
-          {children}
-        </ModalContextProvider>
+        <ModalContextProvider>{children}</ModalContextProvider>
       </AuthContextProvider>
     </ToastProvider>
   )

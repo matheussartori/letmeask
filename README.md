@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="letmeask logo" height="350" src="https://github.com/matheussartori/letmeask/raw/main/assets/logo.svg" />
+  <img alt="letmeask logo" height="160" src="https://github.com/matheussartori/letmeask/raw/main/assets/logo.svg" />
 </p>
 
 <h3 align="center">
@@ -76,6 +76,8 @@ This software was developed on the NextLevelWeek Together event, but some featur
   <img alt="PWA example" src="https://github.com/matheussartori/letmeask/raw/main/assets/letmeask-dark.png" />
 </p>
 
+- Other improvements like design and UX, ESLint and Prettier, better error handling, styled components and a big app refactor.
+
 ---
 
-Made with ❤️ by Redstone Solutions :wave: [Join our community!](https://discord.gg/SNQXH5cKEB)
+Made with ❤️ and also, thanks for the awesome week, Rocketseat! :wave:

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 
 import logoImg from '../../../assets/images/logo.svg'
@@ -20,9 +20,8 @@ type RoomHeaderProps = {
 }
 
 export function RoomHeader({ roomId, isAdmin }: RoomHeaderProps): JSX.Element {
-  const [isConfirmed, setIsConfirmed] = useState(false)
   const history = useHistory()
-  const { openModal } = useModal()
+  const { openModal, isConfirmed, setIsConfirmed } = useModal()
   const { addToast } = useToasts()
 
   useEffect(() => {

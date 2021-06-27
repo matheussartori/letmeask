@@ -24,6 +24,13 @@
   <a href="#closing-the-chat">Closing the chat</a><br>
 </p>
 
+# Try it
+
+letmeask is hosted on firebase. You can play arround in:
+<a href="https://letmeask-86e5c.web.app/" target="_blank">letmeask firebase app</a>.
+
+<hr />
+
 ## About the project
 
 Let me ask is a realtime Q&A app, developed for events and live broadcasts.

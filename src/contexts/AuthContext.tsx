@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext, ReactNode } from 'react'
+import { useToasts } from 'react-toast-notifications'
 import { auth, firebase } from '../services/firebase'
 
 type User = {
@@ -20,23 +21,26 @@ export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthContextProvider ({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<User>()
+  const { addToast } = useToasts()
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        if (user) {
-          const { displayName, photoURL, uid } = user
+        const { displayName, photoURL, uid } = user
 
-          if (!displayName || !photoURL) {
-            throw new Error('Missing information from Google Account.')
-          }
-
-          setUser({
-            id: uid,
-            name: displayName,
-            avatar: photoURL
+        if (!displayName || !photoURL) {
+          addToast('Existem informações faltando na sua conta Google. Por favor, defina um nome e uma foto e tente novamente.', {
+            appearance: 'error',
+            autoDismiss: true
           })
+          return
         }
+
+        setUser({
+          id: uid,
+          name: displayName,
+          avatar: photoURL
+        })
       }
     })
 
@@ -54,7 +58,11 @@ export function AuthContextProvider ({ children }: AuthContextProviderProps) {
       const { displayName, photoURL, uid } = result.user
 
       if (!displayName || !photoURL) {
-        throw new Error('Missing information from Google Account.')
+        addToast('Existem informações faltando na sua conta Google. Por favor, defina um nome e uma foto e tente novamente.', {
+          appearance: 'error',
+          autoDismiss: true
+        })
+        return
       }
 
       setUser({

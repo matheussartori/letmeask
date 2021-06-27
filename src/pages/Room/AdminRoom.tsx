@@ -16,6 +16,7 @@ import { useModal } from '../../hooks/useModal'
 import { database } from '../../services/firebase'
 
 import './styles.scss'
+import { useToasts } from 'react-toast-notifications'
 
 type RoomParams = {
   id: string
@@ -24,39 +25,46 @@ type RoomParams = {
 export function AdminRoom () {
   const [sharedQuestionId, setSharedQuestionId] = useState('')
   const [action, setAction] = useState('')
+
   const params = useParams<RoomParams>()
   const roomId = params.id
-  const { title, questions } = useRoom(roomId)
   const history = useHistory()
+
+  const { addToast } = useToasts()
+  const { title, questions } = useRoom(roomId)
   const { openModal, isConfirmed, setIsConfirmed } = useModal()
 
   useEffect(() => {
-    async function handleEndRoomModal () {
+    async function handleEndRoom () {
       if (isConfirmed && action === 'end_room') {
         await database.ref(`rooms/${roomId}`).update({
           endedAt: new Date()
         })
 
         history.push('/')
+        addToast('Sala encerrada com sucesso!', {
+          appearance: 'success',
+          autoDismiss: true
+        })
       }
       setIsConfirmed(false)
       setAction('')
     }
-    handleEndRoomModal()
+    handleEndRoom()
   }, [isConfirmed])
 
   useEffect(() => {
-    async function handleDeleteQuestionModal () {
+    async function handleDeleteQuestion () {
       if (isConfirmed && action === 'delete_question') {
         await database.ref(`rooms/${roomId}/questions/${sharedQuestionId}`).remove()
       }
       setIsConfirmed(false)
       setAction('')
     }
-    handleDeleteQuestionModal()
+    handleDeleteQuestion()
   }, [isConfirmed])
 
-  async function handleEndRoom () {
+  async function openEndRoomModal () {
     setAction('end_room')
     openModal({
       title: 'Encerrar sala',
@@ -67,7 +75,7 @@ export function AdminRoom () {
     })
   }
 
-  async function handleDeleteQuestion (questionId: string) {
+  async function openDeleteQuestionModal (questionId: string) {
     setAction('delete_question')
     setSharedQuestionId(questionId)
     openModal({
@@ -100,7 +108,7 @@ export function AdminRoom () {
             <RoomCode code={roomId} />
             <Button
               isOutlined
-              onClick={handleEndRoom}
+              onClick={openEndRoomModal}
             >Encerrar sala</Button>
           </div>
         </div>
@@ -142,7 +150,7 @@ export function AdminRoom () {
                 )}
                 <button
                   type="button"
-                  onClick={() => handleDeleteQuestion(question.id)}
+                  onClick={() => openDeleteQuestionModal(question.id)}
                 >
                   <img src={deleteImg} alt="Remover pergunta" />
                 </button>

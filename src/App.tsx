@@ -5,20 +5,17 @@ import { NewRoom } from './pages/Home/NewRoom'
 import { Room } from './pages/Room'
 import { AdminRoom } from './pages/Room/AdminRoom'
 
-import { AuthContextProvider } from './contexts/AuthContext'
-import { ModalContextProvider } from './contexts/ModalContext'
+import { AppProvider } from './AppProvider'
 
 function App () {
   return (
     <BrowserRouter>
-      <AuthContextProvider>
-        <ModalContextProvider>
-          <Route path="/" exact component={Home} />
-          <Route path="/rooms/new" component={NewRoom} />
-          <Route path="/rooms/:id" component={Room} />
-          <Route path="/admin/rooms/:id" component={AdminRoom} />
-        </ModalContextProvider>
-      </AuthContextProvider>
+      <AppProvider>
+        <Route path="/" exact component={Home} />
+        <Route path="/rooms/new" component={NewRoom} />
+        <Route path="/rooms/:id" component={Room} />
+        <Route path="/admin/rooms/:id" component={AdminRoom} />
+      </AppProvider>
     </BrowserRouter>
   )
 }

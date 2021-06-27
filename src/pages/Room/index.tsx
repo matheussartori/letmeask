@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useToasts } from 'react-toast-notifications'
 
 import logoImg from '../../assets/images/logo.svg'
 
@@ -22,6 +23,7 @@ export function Room () {
   const [newQuestion, setNewQuestion] = useState('')
 
   const { user } = useAuth()
+  const { addToast } = useToasts()
   const params = useParams<RoomParams>()
   const roomId = params.id
   const { title, questions } = useRoom(roomId)
@@ -34,7 +36,11 @@ export function Room () {
     }
 
     if (!user) {
-      throw new Error('You must be logged in')
+      addToast('Você precisa fazer login antes.', {
+        appearance: 'error',
+        autoDismiss: true
+      })
+      return
     }
 
     const question = {

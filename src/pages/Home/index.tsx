@@ -40,7 +40,7 @@ export function Home(): JSX.Element {
     if (!roomRef.exists()) {
       openModal({
         title: 'Oops!',
-        text: 'A sala informada não existe.',
+        text: 'The specified room does not exists.',
         icon: 'denied',
         confirmButtonText: 'OK'
       })
@@ -50,7 +50,7 @@ export function Home(): JSX.Element {
     if (roomRef.val().endedAt) {
       openModal({
         title: 'Oops!',
-        text: 'A sala informada já foi encerrada.',
+        text: 'This room was already closed.',
         icon: 'denied',
         confirmButtonText: 'OK'
       })
@@ -65,27 +65,27 @@ export function Home(): JSX.Element {
       <aside>
         <img
           src={illustrationImg}
-          alt="Ilustração simbolizando perguntas e respostas"
+          alt="Illustration symbolizing questions and answers"
         />
-        <strong>Crie salas de Q&amp;A ao-vivo</strong>
-        <p>Tire as dúvidas da sua audiência em tempo-real</p>
+        <strong>Create live Q&amp;A rooms</strong>
+        <p>Ask your audience&apos;s questions in real-time</p>
       </aside>
       <main>
         <div className="main-content">
           <img src={logoImg} alt="Letmeask" />
           <button className="create-room" onClick={handleCreateRoom}>
-            <img src={googleIconImage} alt="Logo do Google" />
-            Crie sua sala com o Google
+            <img src={googleIconImage} alt="Google Logo" />
+            Create your room with google
           </button>
-          <div className="separator">ou entre em uma sala</div>
+          <div className="separator">or enter a room</div>
           <form onSubmit={handleJoinRoom}>
             <input
               type="text"
-              placeholder="Digite o código da sala"
+              placeholder="Type the room code"
               value={roomCode}
               onChange={event => setRoomCode(event.target.value)}
             />
-            <Button type="submit">Entrar na sala</Button>
+            <Button type="submit">Join room</Button>
           </form>
         </div>
       </main>

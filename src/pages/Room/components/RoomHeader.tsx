@@ -44,11 +44,11 @@ export function RoomHeader({ roomId, isAdmin }: RoomHeaderProps): JSX.Element {
 
   async function openEndRoomModal() {
     openModal({
-      title: 'Encerrar sala',
+      title: 'Close room',
       icon: 'denied',
-      text: 'Tem certeza que você deseja encerrar esta sala?',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Sim, encerrar'
+      text: 'Are you sure you want to close this room?',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Yes, close'
     })
   }
 
@@ -62,7 +62,7 @@ export function RoomHeader({ roomId, isAdmin }: RoomHeaderProps): JSX.Element {
           <RoomCode code={roomId} />
           {isAdmin && (
             <Button isOutlined onClick={openEndRoomModal}>
-              Encerrar sala
+              Close this room
             </Button>
           )}
           <ThemeSwitch />

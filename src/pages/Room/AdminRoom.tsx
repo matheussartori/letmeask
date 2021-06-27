@@ -44,11 +44,11 @@ export function AdminRoom(): JSX.Element {
   async function openDeleteQuestionModal(questionId: string) {
     setSharedQuestionId(questionId)
     openModal({
-      title: 'Excluir pergunta',
+      title: 'Delete question',
       icon: 'trash',
-      text: 'Tem certeza que você deseja excluir esta pergunta?',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Sim, excluir'
+      text: 'Are you sure you want to delete this question?',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Yes, delete'
     })
   }
 
@@ -69,8 +69,8 @@ export function AdminRoom(): JSX.Element {
       <RoomHeader roomId={roomId} isAdmin />
       <main>
         <div className="room-title">
-          <h1>Sala {title}</h1>
-          {questions.length > 0 && <span>{questions.length} pergunta(s)</span>}
+          <h1>Room {title}</h1>
+          {questions.length > 0 && <span>{questions.length} question(s)</span>}
         </div>
 
         <div className="question-list">
@@ -89,16 +89,13 @@ export function AdminRoom(): JSX.Element {
                       type="button"
                       onClick={() => handleCheckQuestionAsAnswered(question.id)}
                     >
-                      <img
-                        src={checkImg}
-                        alt="Marcar pergunta como respondida"
-                      />
+                      <img src={checkImg} alt="Mark question as answered" />
                     </button>
                     <button
                       type="button"
                       onClick={() => handleHighlightQuestion(question.id)}
                     >
-                      <img src={answerImg} alt="Dar destaque à pergunta" />
+                      <img src={answerImg} alt="Mark question as highlighted" />
                     </button>
                   </>
                 )}
@@ -106,7 +103,7 @@ export function AdminRoom(): JSX.Element {
                   type="button"
                   onClick={() => openDeleteQuestionModal(question.id)}
                 >
-                  <img src={deleteImg} alt="Remover pergunta" />
+                  <img src={deleteImg} alt="Delete question" />
                 </button>
               </Question>
             )
@@ -115,11 +112,10 @@ export function AdminRoom(): JSX.Element {
 
         {questions && questions.length === 0 && (
           <div className="empty-questions" style={{ marginTop: 150 }}>
-            <img src={emptyQuestionsImg} alt="Nenhuma pergunta" />
-            <h3>Nenhuma pergunta por aqui...</h3>
+            <img src={emptyQuestionsImg} alt="No questions" />
+            <h3>No questions arround here...</h3>
             <p>
-              Envie o código desta sala para seus amigos e comece a responder
-              perguntas!
+              Send this room code to your friends and start answering questions!
             </p>
           </div>
         )}

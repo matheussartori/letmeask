@@ -32,7 +32,7 @@ export function AuthContextProvider({
 
         if (!displayName || !photoURL) {
           addToast(
-            'Existem informações faltando na sua conta Google. Por favor, defina um nome e uma foto e tente novamente.',
+            'There are missing data on your Google Account. Please, set a name and photo and try again.',
             {
               appearance: 'error',
               autoDismiss: true
@@ -64,7 +64,7 @@ export function AuthContextProvider({
 
       if (!displayName || !photoURL) {
         addToast(
-          'Existem informações faltando na sua conta Google. Por favor, defina um nome e uma foto e tente novamente.',
+          'There are missing data on your Google Account. Please, set a name and photo and try again.',
           {
             appearance: 'error',
             autoDismiss: true

@@ -36,7 +36,7 @@ export function Room(): JSX.Element {
     }
 
     if (!user) {
-      addToast('Você precisa fazer login antes.', {
+      addToast('You need to login first.', {
         appearance: 'error',
         autoDismiss: true
       })
@@ -79,13 +79,13 @@ export function Room(): JSX.Element {
 
       <main>
         <div className="room-title">
-          <h1>Sala {title}</h1>
-          {questions.length > 0 && <span>{questions.length} pergunta(s)</span>}
+          <h1>Room {title}</h1>
+          {questions.length > 0 && <span>{questions.length} question(s)</span>}
         </div>
 
         <form onSubmit={handleSendQuestion}>
           <textarea
-            placeholder="O que você quer perguntar?"
+            placeholder="What do you want to ask?"
             onChange={event => setNewQuestion(event.target.value)}
             value={newQuestion}
           />
@@ -98,12 +98,12 @@ export function Room(): JSX.Element {
               </div>
             ) : (
               <span>
-                Para enviar uma pergunta,
-                <button onClick={signInWithGoogle}>faça seu login</button>.
+                To ask a question,
+                <button onClick={signInWithGoogle}>sign in first</button>.
               </span>
             )}
             <Button type="submit" disabled={!user}>
-              Enviar pergunta
+              Send question
             </Button>
           </div>
         </form>
@@ -155,13 +155,11 @@ export function Room(): JSX.Element {
         {questions && questions.length === 0 && (
           <div className="empty-questions">
             <img src={emptyQuestionsImg} alt="Nenhuma pergunta" />
-            <h3>Nenhuma pergunta por aqui...</h3>
+            <h3>No questions arround here...</h3>
             {user ? (
-              <p>Seja a primeira pessoa a fazer uma pergunta!</p>
+              <p>Be the first person to ask!</p>
             ) : (
-              <p>
-                Faça seu login e seja a primeira pessoa a fazer uma pergunta!
-              </p>
+              <p>Sign in and be the first person to ask!</p>
             )}
           </div>
         )}

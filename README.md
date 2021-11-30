@@ -87,4 +87,4 @@ This software was developed on the NextLevelWeek Together event, but some featur
 
 ---
 
-Made with ❤️ and also, thanks for the awesome week, Rocketseat! :wave:
+Made by Matheus Sartori
